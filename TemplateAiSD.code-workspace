@@ -4,5 +4,22 @@
 			"path": "."
 		}
 	],
-	"settings": {}
-}
+	"settings": {},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"name": "Rust: Debug Hello World",
+				"type": "lldb",
+				"request": "launch",
+				"program": "${workspaceFolder}/target/debug/hello_world",
+				"args": [],
+				"stopOnEntry": false,
+				"cwd": "${workspaceFolder}",
+				"sourceMap": { //IMPORTANT: Rust changes symlinked paths to normal paths, so source mapping needs to be done
+				  "/mnt/c/Users/domio/OneDrive/Documents/WSL_Code/TemplateAiSD/src": "${workspaceFolder}/src"
+				}
+			}
+		]
+	}
+} 
