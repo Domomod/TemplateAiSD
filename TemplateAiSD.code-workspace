@@ -4,5 +4,23 @@
 			"path": "."
 		}
 	],
-	"settings": {}
-}
+	"settings": {},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"name": "Python: Debug Hello World",
+				"type": "python",
+				"request": "launch",
+				"program": "${workspaceFolder}/main.py",
+				"console": "integratedTerminal",
+				"stopOnEntry": false,
+				"cwd": "${workspaceFolder}",
+				"python": "python3",
+				"env": {},
+				"debugOptions": [],
+				"args": [],
+			}
+		]
+	}
+} 
