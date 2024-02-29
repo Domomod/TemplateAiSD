@@ -4,5 +4,28 @@
 			"path": "."
 		}
 	],
-	"settings": {}
+	"settings": {},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+		{
+			"name": "C++: Debug Hello World",
+			"type": "cppdbg",
+			"request": "launch",
+			"program": "${workspaceFolder}/target/debug/hello_world", // Path to your compiled executable
+			"args": [],
+			"stopAtEntry": false,
+			"cwd": "${workspaceFolder}",
+			"environment": [],
+			"externalConsole": false,
+			"MIMode": "gdb",
+			"setupCommands": [
+			  {
+				"description": "Enable pretty-printing for gdb",
+				"text": "-enable-pretty-printing",
+				"ignoreFailures": true
+			  }
+			],
+		}]
+	}
 }
