@@ -14,7 +14,7 @@ class Algorithms:
     def selection_sort(arr: list) -> None:
         for i in range(len(arr)-1):
             min_index: int = i
-            for dg in range(min_index + 1, len(arr)):
+            for d in range(min_index + 1, len(arr)):
                 if arr[d] < arr[min_index]:
                     min_index = d
             arr[i], arr[min_index] = arr[min_index], arr[i]
