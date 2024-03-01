@@ -1,7 +1,7 @@
 class Algorithms:
 
     @staticmethod
-    def insert_sort(arr: list) -> list:
+    def insert_sort(arr: list) -> None:
         for i in range(0, len(arr)):
             key: int = arr[i]
             j: int = i - 1
@@ -9,13 +9,12 @@ class Algorithms:
                 arr[j + 1] = arr[j]
                 j -= 1
             arr[j + 1] = key
-        return arr
 
     @staticmethod
-    def selection_sort(arr):
+    def selection_sort(arr: list) -> None:
         for i in range(len(arr)-1):
-            min_index = i
-            for d in range(min_index + 1, len(arr)):
+            min_index: int = i
+            for dg in range(min_index + 1, len(arr)):
                 if arr[d] < arr[min_index]:
                     min_index = d
             arr[i], arr[min_index] = arr[min_index], arr[i]
