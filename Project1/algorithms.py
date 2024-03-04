@@ -53,11 +53,41 @@ class Algorithms:
             for s in range(0, curr_growth): # current set
                 Algorithms.selection_sort_with_step(arr, curr_growth, s)
 
+
+    @staticmethod
+    def quicksort_partition(arr: list, k: int, l: int, rand_pivot: bool = True) -> int:
+        x = arr[k if not rand_pivot else random.randint(k, l)]
+        i = k
+        j = l
+        while True:
+            while arr[i] < x:
+                i += 1
+            while arr[j] > x:
+                j -= 1
+            if i < j:
+                arr[i], arr[j] = arr[j], arr[i]
+                i += 1
+                j -= 1
+            else:
+                return j
+
+    @staticmethod
+    def quicksort(arr: list, k: int = 0, l: int = None, rand_pivot: bool = True):
+        if l == None:
+            l = len(arr)-1
+        
+        if k < l:
+            p = Algorithms.quicksort_partition(arr, k, l, rand_pivot)
+            Algorithms.quicksort(arr, k, p)
+            Algorithms.quicksort(arr, p+1, l)
+
+        
+
 n = 20
 x = [random.randint(1, n) for i in range(n)]
 
 alg = Algorithms()
 
 print(x)
-alg.shell_sort(x)
+alg.quicksort(x, rand_pivot=False)
 print(x)
