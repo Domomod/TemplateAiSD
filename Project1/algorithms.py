@@ -1,4 +1,5 @@
 import random
+import math
 
 class Algorithms:
 
@@ -81,6 +82,34 @@ class Algorithms:
             Algorithms.quicksort(arr, k, p)
             Algorithms.quicksort(arr, p+1, l)
 
+    @staticmethod
+    def recover_heap(arr: list, length: int, parent: int = 0):
+
+        if parent >= length:
+            return
+    
+        ids = [parent, parent*2+1, parent*2+2]
+
+        max_id = ids[0]
+        for id in ids:
+            if id < length and arr[id] > arr[max_id]:
+                max_id = id
+        
+        arr[parent], arr[max_id] = arr[max_id], arr[parent]
+
+        Algorithms.recover_heap(arr, length, ids[1])
+        Algorithms.recover_heap(arr, length, ids[2])
+
+    @staticmethod
+    def heap_sort(arr: list):
+        Algorithms.recover_heap(arr, len(arr))
+
+        end_bound = len(arr)-1
+        while end_bound >= 0:
+            arr[0], arr[end_bound] = arr[end_bound], arr[0]
+            Algorithms.recover_heap(arr, end_bound)
+            end_bound -= 1
+        
         
 
 n = 20
@@ -89,5 +118,5 @@ x = [random.randint(1, n) for i in range(n)]
 alg = Algorithms()
 
 print(x)
-alg.quicksort(x, rand_pivot=False)
+alg.heap_sort(x)
 print(x)
