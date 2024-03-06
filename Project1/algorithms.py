@@ -1,5 +1,7 @@
 import random
 import math
+import timeit
+import math
 
 class Algorithms:
 
@@ -82,38 +84,132 @@ class Algorithms:
             Algorithms.quicksort(arr, k, p)
             Algorithms.quicksort(arr, p+1, l)
 
-    @staticmethod
-    def recover_heap(arr: list, length: int, parent: int = 0):
+    # @staticmethod
+    # def recover_heap(arr: list, length: int, parent: int = 0):
 
-        if parent >= length:
-            return
+    #     if parent >= length:
+    #         return
     
-        ids = [parent, parent*2+1, parent*2+2]
+    #     ids = [parent, parent*2+1, parent*2+2]
 
-        max_id = ids[0]
-        for id in ids:
-            if id < length and arr[id] > arr[max_id]:
-                max_id = id
+    #     max_id = ids[0]
+    #     for id in ids:
+    #         if id < length and arr[id] > arr[max_id]:
+    #             max_id = id
         
-        arr[parent], arr[max_id] = arr[max_id], arr[parent]
+    #     arr[parent], arr[max_id] = arr[max_id], arr[parent]
 
-        Algorithms.recover_heap(arr, length, ids[1])
-        Algorithms.recover_heap(arr, length, ids[2])
+    #     Algorithms.recover_heap(arr, length, ids[1])
+    #     Algorithms.recover_heap(arr, length, ids[2])
+            
+    @staticmethod
+    def recover_heap_for_all(arr: list):
+
+        def judge_family(parent: int):
+            child1 = parent*2 + 1
+            child2 = parent*2 + 2
+
+            if arr[child1] > arr[parent]:
+                arr[child1], arr[parent] = arr[parent], arr[child1]
+                return True
+
+            if arr[child2] > arr[parent]:
+                arr[child2], arr[parent] = arr[parent], arr[child2]
+                return True
+
+            return False
+
+        for i in range(len(arr)//2 -1, -1,-1):
+            if judge_family(i) and i == 0:
+                Algorithms.recover_heap_for_all(arr)
+
+
 
     @staticmethod
     def heap_sort(arr: list):
-        Algorithms.recover_heap(arr, len(arr))
+        Algorithms.recover_heap_for_all(arr)
+
+        print(arr)
 
         end_bound = len(arr)-1
         while end_bound >= 0:
             arr[0], arr[end_bound] = arr[end_bound], arr[0]
-            Algorithms.recover_heap(arr, end_bound)
+
+            m = 0
+            while m < end_bound:
+                child1 = m*2 + 1
+                child2 = m*2 + 2
+
+                # if child1 <= child2 < end_bound and arr[m] > arr[child1] and arr[m] > arr[child2]:
+                #     m = end_bound
+                #     continue
+
+                if child1 < end_bound and arr[child1] > arr[child2]:
+                    arr[m], arr[child1] = arr[child1], arr[m]
+                    m = child1
+                    continue
+                
+                if child2 < end_bound and arr[child2] > arr[child1]:
+                    arr[m], arr[child2] = arr[child2], arr[m]
+                    m = child2
+                    continue
+
+                m = end_bound
+
+
             end_bound -= 1
         
         
+        
 
-n = 20
+n = 11
 x = [random.randint(1, n) for i in range(n)]
+x = [2, 3, 1, 8, 6, 9, 1, 0, 4, 5,7]
+# x = [1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+#         2
+#     3       1
+#   8   6   9   1
+#  0 4 5 7
+
+#         9
+#     7       8
+#   3   4   1   1
+#  0 2 5 6
+
+#         6
+#     7       8
+#   3   4   1   1
+#  0 2 5 /9/
+
+#         8
+#     7       6
+#   3   4   1   1
+#  0 2 5 /9/
+
+#         5
+#     7       6
+#   3   4   1   1
+#  0 2 /8/ /9/
+
+#         7
+#     5       6
+#   3   4   1   1
+#  0 2 /8/ /9/
+
+#         7
+#     4       6
+#   3   5   1   1
+#  0 2 /8/ /9/
+
+#         7
+#     4       6
+#   3   5   1   1
+#  0 2 /8/ /9/
+
+
+
+
 
 alg = Algorithms()
 
